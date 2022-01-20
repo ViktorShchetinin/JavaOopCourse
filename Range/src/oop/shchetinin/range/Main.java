@@ -1,3 +1,5 @@
+package oop.shchetinin.range;
+
 import java.util.Scanner;
 
 public class Main {
