@@ -1,4 +1,4 @@
-package oop.shchetinin.range;
+package oop.shchetinin.range.Range;
 
 public class Range {
     private double from;

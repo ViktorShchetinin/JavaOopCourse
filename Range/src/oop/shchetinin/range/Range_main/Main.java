@@ -1,4 +1,6 @@
-package oop.shchetinin.range;
+package oop.shchetinin.range.Range_main;
+
+import oop.shchetinin.range.Range.Range;
 
 import java.util.Scanner;
 
@@ -13,6 +15,9 @@ public class Main {
 
         System.out.println("Объект range1");
         System.out.println("Начало range1: " + range1.getFrom());
+        System.out.println();
+
+        System.out.println("Конец range1: " + range1.getTo());
         System.out.println();
 
         range1.setFrom(3);
@@ -38,6 +43,7 @@ public class Main {
         System.out.println();
 
         System.out.println("Конец range2: " + range2.getTo());
+        System.out.println();
 
         range2.setTo(3);
         System.out.println("Конец range2 после изменения с помощью сеттера: " + range2.getTo());
