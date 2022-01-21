@@ -11,7 +11,7 @@ public class Main {
         System.out.println("Введите число:");
         double userNumber = scanner.nextDouble();
 
-        Range range1 = new Range(5, 2);
+        Range range1 = new Range("range1", 5, 2);
 
         System.out.println("Объект range1");
         System.out.println("Начало range1: " + range1.getFrom());
@@ -30,7 +30,7 @@ public class Main {
         System.out.println("Введеное число принадлежит диапазону range1: " + range1.isInside(userNumber));
         System.out.println();
 
-        Range range2 = new Range(1, 6);
+        Range range2 = new Range("range2", 1, 6);
 
         System.out.println("Объект range2");
         System.out.println("Длина диапазона range2: " + range2.getLength());
@@ -47,5 +47,8 @@ public class Main {
 
         range2.setTo(3);
         System.out.println("Конец range2 после изменения с помощью сеттера: " + range2.getTo());
+        System.out.println();
+
+        range2.print();
     }
 }
