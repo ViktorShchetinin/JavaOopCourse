@@ -1,12 +1,10 @@
-package oop.shchetinin.range.Range;
+package oop.shchetinin.range;
 
 public class Range {
-    private String name;
     private double from;
     private double to;
 
-    public Range(String name, double from, double to) {
-        this.name = name;
+    public Range(double from, double to) {
         this.from = from;
         this.to = to;
     }
@@ -35,9 +33,7 @@ public class Range {
         return number >= from && number <= to;
     }
 
-    public void print() {
-        System.out.println(this.name);
-        System.out.println("От: " + from);
-        System.out.println("До: " + to);
+    public String toString() {
+        return getFrom() + ", " + getTo();
     }
 }
