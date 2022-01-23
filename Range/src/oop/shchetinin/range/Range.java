@@ -127,10 +127,6 @@ public class Range {
             return new Range[]{new Range(range2.to, range1.to)};
         }
 
-        if (range2.from < range1.from && range1.from < range1.to && range1.to < range2.to) {
-            return null;
-        }
-
         return null;
     }
 }
