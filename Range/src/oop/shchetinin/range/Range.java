@@ -33,7 +33,104 @@ public class Range {
         return number >= from && number <= to;
     }
 
+    @Override
     public String toString() {
-        return getFrom() + ", " + getTo();
+        return "(" + from + "; " + to + ")";
+    }
+
+    public String toString(Range[] rangeArray) {
+        StringBuilder sb = new StringBuilder();
+
+        if (rangeArray == null) {
+            return null;
+        } else {
+            for (Range range : rangeArray) {
+                sb.append(range.toString());
+            }
+        }
+
+        return sb.toString();
+    }
+
+    public Range getIntersectionInterval(Range range1, Range range2) {
+        if (range1 == null || range2 == null) {
+            return null;
+        }
+
+        if (range1.from < range2.from && range2.from < range1.to && range1.to < range2.to) {
+            return new Range(range2.from, range1.to);
+        }
+
+        if (range2.from < range1.from && range1.from < range2.to && range2.to < range1.to) {
+            return new Range(range1.from, range2.to);
+        }
+
+        if (range1.from < range2.from && range2.from < range2.to && range2.to < range1.to) {
+            return new Range(range2.from, range2.to);
+        }
+
+        if (range2.from < range1.from && range1.from < range1.to && range1.to < range2.to) {
+            return new Range(range1.from, range1.to);
+        }
+
+        return null;
+    }
+
+    public Range[] getUnionInterval(Range range1, Range range2) {
+        if (range1 == null || range2 == null) {
+            return null;
+        }
+
+        if (range1.from < range2.from && range2.from <= range1.to && range1.to < range2.to) {
+            return new Range[]{new Range(range1.from, range2.to)};
+        }
+
+        if (range2.from < range1.from && range1.from <= range2.to && range2.to < range1.to) {
+            return new Range[]{new Range(range2.from, range1.to)};
+        }
+
+        if (range1.from <= range2.from && range2.from <= range2.to && range2.to <= range1.to) {
+            return new Range[]{new Range(range1.from, range1.to)};
+        }
+
+        if (range2.from <= range1.from && range1.from <= range1.to && range1.to <= range2.to) {
+            return new Range[]{new Range(range2.from, range2.to)};
+        }
+
+        if ((range1.from <= range1.to && range1.to < range2.from && range2.from <= range2.to) ||
+                (range2.from <= range2.to && range2.to < range1.from && range1.from <= range1.to)) {
+
+            return new Range[]{range1, range2};
+        }
+
+        return null;
+    }
+
+    public Range[] getDifferenceInterval(Range range1, Range range2) {
+        if (range1 == null || range2 == null) {
+            return null;
+        }
+
+        if (range1.from < range2.from && range2.from < range2.to && range2.to < range1.to) {
+            return new Range[]{new Range(range1.from, range2.from), new Range(range2.to, range1.to)};
+        }
+
+        if (range1.from < range1.to && range1.to < range2.from && range2.from < range2.to) {
+            return new Range[]{range1};
+        }
+
+        if (range1.from < range2.from && range2.from < range1.to && range1.to < range2.to) {
+            return new Range[]{new Range(range1.from, range2.from)};
+        }
+
+        if (range2.from < range1.from && range1.from < range2.to && range2.to < range1.to) {
+            return new Range[]{new Range(range2.to, range1.to)};
+        }
+
+        if (range2.from < range1.from && range1.from < range1.to && range1.to < range2.to) {
+            return null;
+        }
+
+        return null;
     }
 }
