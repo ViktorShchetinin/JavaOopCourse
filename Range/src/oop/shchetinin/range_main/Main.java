@@ -44,18 +44,18 @@ public class Main {
         System.out.println("Конец range2 после изменения с помощью сеттера: " + range2.getTo());
         System.out.println();
 
-        Range range3 = new Range(2, 6);
-        Range range4 = new Range(1, 4);
+        Range range3 = new Range(7, 7);
+        Range range4 = new Range(2, 8);
 
         System.out.println(range3);
         System.out.println(range4);
 
-        System.out.println("Результат пересечения интервалов: " + range3.getIntersectionInterval(range3, range4));
+        System.out.println("Результат пересечения интервалов: " + range3.getIntersection(range4));
 
         System.out.println("Результат объединения интервалов: " +
-                range3.toString(range3.getUnionInterval(range3, range4)));
+                Range.toString(range3.getUnion(range4)));
 
         System.out.println("Результат разности первого и второго интервала: " +
-                range3.toString(range3.getDifferenceInterval(range3, range4)));
+                Range.toString(range3.getDifference(range4)));
     }
 }

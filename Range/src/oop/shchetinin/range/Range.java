@@ -38,95 +38,100 @@ public class Range {
         return "(" + from + "; " + to + ")";
     }
 
-    public String toString(Range[] rangeArray) {
+    public static String toString(Range[] rangeArrays) {
         StringBuilder sb = new StringBuilder();
 
-        if (rangeArray == null) {
+        if (rangeArrays == null) {
             return null;
+        }
+
+        if (rangeArrays.length == 0) {
+            return "[]";
+        }
+
+        if (rangeArrays.length == 1) {
+            for (Range range : rangeArrays) {
+                sb.append("[")
+                        .append(range)
+                        .append("]");
+            }
         } else {
-            for (Range range : rangeArray) {
-                sb.append(range.toString());
+            sb.append("[").append(rangeArrays[0]).append(", ");
+
+            for (int i = 1; i < rangeArrays.length; i++) {
+                if (i < rangeArrays.length - 1) {
+                    sb.append(rangeArrays[i]).append(", ");
+                } else {
+                    sb.append(rangeArrays[i]).append("]");
+                }
             }
         }
 
         return sb.toString();
     }
 
-    public Range getIntersectionInterval(Range range1, Range range2) {
-        if (range1 == null || range2 == null) {
-            return null;
-        }
-
-        if (range1.from < range2.from && range2.from < range1.to && range1.to < range2.to) {
-            return new Range(range2.from, range1.to);
-        }
-
-        if (range2.from < range1.from && range1.from < range2.to && range2.to < range1.to) {
-            return new Range(range1.from, range2.to);
-        }
-
-        if (range1.from < range2.from && range2.from < range2.to && range2.to < range1.to) {
+    public Range getIntersection(Range range2) {
+        if ((Math.min(this.from, range2.from) == this.from) && (Math.max(this.to, range2.to) == this.to)) {
             return new Range(range2.from, range2.to);
         }
 
-        if (range2.from < range1.from && range1.from < range1.to && range1.to < range2.to) {
-            return new Range(range1.from, range1.to);
+        if ((Math.min(this.from, range2.from) == range2.from) && (Math.max(this.to, range2.to) == range2.to)) {
+            return new Range(this.from, this.to);
+        }
+
+        if ((Math.min(this.to, range2.from) == range2.from) && (Math.min(this.from, range2.from) == this.from)) {
+            return new Range(range2.from, this.to);
+        }
+
+        if ((Math.min(this.from, range2.to) == this.from) && (Math.min(this.from, range2.from) == range2.from)) {
+            return new Range(this.from, range2.to);
         }
 
         return null;
     }
 
-    public Range[] getUnionInterval(Range range1, Range range2) {
-        if (range1 == null || range2 == null) {
-            return null;
+    public Range[] getUnion(Range range2) {
+        if (this.to < range2.from || range2.to < this.from) {
+            return new Range[]{new Range(this.from, this.to), new Range(range2.from, range2.to)};
         }
 
-        if (range1.from < range2.from && range2.from <= range1.to && range1.to < range2.to) {
-            return new Range[]{new Range(range1.from, range2.to)};
+        if ((Math.min(this.from, range2.from) == this.from) && (Math.max(this.to, range2.to) == this.to)) {
+            return new Range[]{new Range(this.from, this.to)};
         }
 
-        if (range2.from < range1.from && range1.from <= range2.to && range2.to < range1.to) {
-            return new Range[]{new Range(range2.from, range1.to)};
-        }
-
-        if (range1.from <= range2.from && range2.from <= range2.to && range2.to <= range1.to) {
-            return new Range[]{new Range(range1.from, range1.to)};
-        }
-
-        if (range2.from <= range1.from && range1.from <= range1.to && range1.to <= range2.to) {
+        if ((Math.min(this.from, range2.from) == range2.from) && (Math.max(this.to, range2.to) == range2.to)) {
             return new Range[]{new Range(range2.from, range2.to)};
         }
 
-        if ((range1.from <= range1.to && range1.to < range2.from && range2.from <= range2.to) ||
-                (range2.from <= range2.to && range2.to < range1.from && range1.from <= range1.to)) {
+        if (this.from <= range2.from && this.to <= range2.to) {
+            return new Range[]{new Range(this.from, range2.to)};
+        }
 
-            return new Range[]{range1, range2};
+        if (this.from >= range2.from && this.to >= range2.to) {
+            return new Range[]{new Range(range2.from, this.to)};
         }
 
         return null;
     }
 
-    public Range[] getDifferenceInterval(Range range1, Range range2) {
-        if (range1 == null || range2 == null) {
-            return null;
+    public Range[] getDifference(Range range2) {
+        if (this.from < range2.from && range2.from < range2.to && range2.to < this.to) {
+            return new Range[]{new Range(this.from, range2.from), new Range(range2.to, this.to)};
         }
 
-        if (range1.from < range2.from && range2.from < range2.to && range2.to < range1.to) {
-            return new Range[]{new Range(range1.from, range2.from), new Range(range2.to, range1.to)};
+        if ((this.from < this.to && this.to <= range2.from && range2.from < range2.to) ||
+                (range2.from < range2.to && range2.to <= this.from && this.from < this.to)) {
+            return new Range[]{new Range(this.from, this.to)};
         }
 
-        if (range1.from < range1.to && range1.to < range2.from && range2.from < range2.to) {
-            return new Range[]{range1};
+        if (this.from < range2.from && range2.from < this.to && this.to < range2.to) {
+            return new Range[]{new Range(this.from, range2.from)};
         }
 
-        if (range1.from < range2.from && range2.from < range1.to && range1.to < range2.to) {
-            return new Range[]{new Range(range1.from, range2.from)};
+        if (range2.from < this.from && this.from < range2.to && range2.to < this.to) {
+            return new Range[]{new Range(range2.to, this.to)};
         }
 
-        if (range2.from < range1.from && range1.from < range2.to && range2.to < range1.to) {
-            return new Range[]{new Range(range2.to, range1.to)};
-        }
-
-        return null;
+        return new Range[]{};
     }
 }
