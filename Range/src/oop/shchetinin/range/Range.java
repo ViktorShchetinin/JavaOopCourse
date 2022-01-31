@@ -66,10 +66,7 @@ public class Range {
             return null;
         }
 
-        double from = Math.max(this.from, range.from);
-        double to = Math.min(this.to, range.to);
-
-        return new Range(from, to);
+        return new Range(Math.max(this.from, range.from), Math.min(this.to, range.to));
     }
 
     public Range[] getUnion(Range range) {
