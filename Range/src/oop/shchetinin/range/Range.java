@@ -39,12 +39,9 @@ public class Range {
     }
 
     public static String toString(Range[] rangesArray) {
-
         if (rangesArray == null) {
             return "[]";
-        }
-
-        if (rangesArray.length == 0) {
+        } else if (rangesArray.length == 0) {
             return "[]";
         }
 
@@ -66,7 +63,7 @@ public class Range {
             return null;
         }
 
-        return new Range(Math.max(this.from, range.from), Math.min(this.to, range.to));
+        return new Range(Math.max(from, range.from), Math.min(to, range.to));
     }
 
     public Range[] getUnion(Range range) {
@@ -74,12 +71,11 @@ public class Range {
             return new Range[]{new Range(from, to), new Range(range.from, range.to)};
         }
 
-        return new Range[]{new Range(Math.min(Math.min(from, range.from), Math.min(to, range.to)),
-                Math.max(Math.max(from, range.from), Math.max(to, range.to)))};
+        return new Range[]{new Range(Math.min(from, range.from), Math.max(to, range.to))};
     }
 
     public Range[] getDifference(Range range) {
-        if (from < range.from && range.from <= range.to && range.to < to) {
+        if (from < range.from && range.to < to) {
             return new Range[]{new Range(from, range.from), new Range(range.to, to)};
         }
 
@@ -88,11 +84,11 @@ public class Range {
             return new Range[]{new Range(from, to)};
         }
 
-        if (from < range.from && range.from < to && to < range.to) {
+        if (from < range.from && range.from < to && to <= range.to) {
             return new Range[]{new Range(from, range.from)};
         }
 
-        if (range.from < from && from < range.to && range.to < to) {
+        if (range.from <= from && from < range.to && range.to < to) {
             return new Range[]{new Range(range.to, to)};
         }
 

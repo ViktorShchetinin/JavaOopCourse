@@ -44,8 +44,8 @@ public class Main {
         System.out.println("Конец range2 после изменения с помощью сеттера: " + range2.getTo());
         System.out.println();
 
-        Range range3 = new Range(5, 10);
-        Range range4 = new Range(4, 11);
+        Range range3 = new Range(1, 5);
+        Range range4 = new Range(2, 5);
 
         System.out.println(range3);
         System.out.println(range4);
