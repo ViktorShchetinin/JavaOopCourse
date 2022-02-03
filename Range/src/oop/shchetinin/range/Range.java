@@ -39,9 +39,7 @@ public class Range {
     }
 
     public static String toString(Range[] rangesArray) {
-        if (rangesArray == null) {
-            return "[]";
-        } else if (rangesArray.length == 0) {
+        if (rangesArray == null || rangesArray.length == 0) {
             return "[]";
         }
 
@@ -79,16 +77,15 @@ public class Range {
             return new Range[]{new Range(from, range.from), new Range(range.to, to)};
         }
 
-        if ((from < to && to <= range.from && range.from < range.to) ||
-                (range.from < range.to && range.to <= from && from < to)) {
+        if (to <= range.from || range.to <= from) {
             return new Range[]{new Range(from, to)};
         }
 
-        if (from < range.from && range.from < to && to <= range.to) {
+        if (from < range.from && to <= range.to) {
             return new Range[]{new Range(from, range.from)};
         }
 
-        if (range.from <= from && from < range.to && range.to < to) {
+        if (range.from <= from && range.to < to) {
             return new Range[]{new Range(range.to, to)};
         }
 
