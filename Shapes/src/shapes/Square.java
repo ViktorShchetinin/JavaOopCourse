@@ -1,6 +1,6 @@
 package shapes;
 
-public class Square implements Shape, Comparable<Shape> {
+public class Square implements Shape {
     private final double sideLength;
 
     public Square(double sideLength) {
@@ -27,13 +27,9 @@ public class Square implements Shape, Comparable<Shape> {
         return sideLength * 4;
     }
 
-    public int compareTo(Shape o) {
-        return (int) (this.getArea() - o.getArea());
-    }
-
     @Override
     public String toString() {
-        return "(Квадрат, площадь: " + getArea() + ", периметр: " + +getPerimeter() + ")";
+        return "(Квадрат, длина стороны: " + sideLength + ")";
     }
 
     @Override

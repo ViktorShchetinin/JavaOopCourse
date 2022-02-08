@@ -1,13 +1,12 @@
 package shapes;
 
-public class Triangle implements Shape, Comparable<Shape> {
+public class Triangle implements Shape {
     private final double x1;
     private final double y1;
     private final double x2;
     private final double y2;
     private final double x3;
     private final double y3;
-    private final double epsilon = 1e-09;
 
     public Triangle(double x1, double y1, double x2, double y2, double x3, double y3) {
         this.x1 = x1;
@@ -18,13 +17,13 @@ public class Triangle implements Shape, Comparable<Shape> {
         this.y3 = y3;
     }
 
-    public double getSide(double x1, double y1, double x2, double y2) {
-        return Math.sqrt(Math.pow((y2 - y1), 2) + Math.pow((x2 - x1), 2));
+    private static double getSideLength(double x1, double y1, double x2, double y2) {
+        return Math.sqrt(Math.pow(y2 - y1, 2) + Math.pow(x2 - x1, 2));
     }
 
     @Override
     public double getWidth() {
-        if (Math.abs((x3 - x1) * (y2 - y1) - (y3 - y1) * (x2 - x1)) < epsilon) {
+        if (getArea() == 0) {
             return 0;
         }
 
@@ -33,7 +32,7 @@ public class Triangle implements Shape, Comparable<Shape> {
 
     @Override
     public double getHeight() {
-        if (Math.abs((x3 - x1) * (y2 - y1) - (y3 - y1) * (x2 - x1)) < epsilon) {
+        if (getArea() == 0) {
             return 0;
         }
 
@@ -42,40 +41,40 @@ public class Triangle implements Shape, Comparable<Shape> {
 
     @Override
     public double getArea() {
-        if (Math.abs((x3 - x1) * (y2 - y1) - (y3 - y1) * (x2 - x1)) < epsilon) {
+        double area = Math.abs((x3 - x1) * (y2 - y1) - (y3 - y1) * (x2 - x1)) / 2;
+
+        double epsilon = 1e-09;
+
+        if (area < epsilon) {
             return 0;
         }
 
-        double triangleSemiPerimeter = (getSide(x1, y1, x2, y2) + getSide(x2, y2, x3, y3) + getSide(x1, y1, x3, y3)) / 2;
-
-        return Math.sqrt(triangleSemiPerimeter * (triangleSemiPerimeter - getSide(x1, y1, x2, y2)) *
-                (triangleSemiPerimeter - getSide(x2, y2, x3, y3)) * (triangleSemiPerimeter - getSide(x1, y1, x3, y3)));
+        return area;
     }
 
     @Override
     public double getPerimeter() {
-        return getSide(x1, y1, x2, y2) + getSide(x2, y2, x3, y3) + getSide(x1, y1, x3, y3);
-    }
-
-    @Override
-    public int compareTo(Shape o) {
-        return (int) (this.getArea() - o.getArea());
+        return getSideLength(x1, y1, x2, y2) + getSideLength(x2, y2, x3, y3) + getSideLength(x1, y1, x3, y3);
     }
 
     @Override
     public String toString() {
-        return "(Треугольник, площадь: " + getArea() + ", периметр: " + +getPerimeter() + ")";
+        return "Треугольник, координаты: " + "(" + x1 + ", " + y1 + "), " + "(" + x2 + ", " + y2 + "), " +
+                "(" + x3 + ", " + y3 + ")";
     }
 
+    @Override
     public int hashCode() {
         final int prime = 31;
         int hash = 1;
+
         hash = prime * hash + Double.hashCode(x1);
         hash = prime * hash + Double.hashCode(x2);
         hash = prime * hash + Double.hashCode(x3);
         hash = prime * hash + Double.hashCode(y1);
         hash = prime * hash + Double.hashCode(y2);
         hash = prime * hash + Double.hashCode(y3);
+
         return hash;
     }
 
@@ -91,7 +90,31 @@ public class Triangle implements Shape, Comparable<Shape> {
 
         Triangle triangle = (Triangle) o;
 
-        return x1 == triangle.x1 && x2 == triangle.x2 && x3 == triangle.x3 &&
-                y1 == triangle.y1 && y2 == triangle.y2 && y3 == triangle.y3;
+        return x1 == triangle.x1 && x2 == triangle.x2 && x3 == triangle.x3
+                && y1 == triangle.y1 && y2 == triangle.y2 && y3 == triangle.y3;
+    }
+
+    public double getX1() {
+        return x1;
+    }
+
+    public double getY1() {
+        return y1;
+    }
+
+    public double getX2() {
+        return x2;
+    }
+
+    public double getY2() {
+        return y2;
+    }
+
+    public double getX3() {
+        return x3;
+    }
+
+    public double getY3() {
+        return y3;
     }
 }

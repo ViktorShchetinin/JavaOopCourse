@@ -1,49 +1,47 @@
 package shapes;
 
-public class Rectangle implements Shape, Comparable<Shape>{
-    private final double sideWidth;
-    private final double sideHeight;
+public class Rectangle implements Shape {
+    private final double width;
+    private final double height;
 
     public Rectangle(double sideWidth, double sideHeight) {
-        this.sideWidth = sideWidth;
-        this.sideHeight = sideHeight;
+        this.width = sideWidth;
+        this.height = sideHeight;
     }
 
     @Override
     public double getWidth() {
-        return sideWidth;
+        return width;
     }
 
     @Override
     public double getHeight() {
-        return sideHeight;
+        return height;
     }
 
     @Override
     public double getArea() {
-        return sideWidth * sideHeight;
+        return width * height;
     }
 
     @Override
     public double getPerimeter() {
-        return (sideWidth + sideHeight) * 2;
-    }
-
-    public int compareTo(Shape o) {
-        return (int) (this.getArea() - o.getArea());
+        return (width + height) * 2;
     }
 
     @Override
     public String toString() {
-        return "(Прямоугольник, площадь: " + getArea() + ", периметр: " + +getPerimeter() + ")";
+        return "(Прямоугольник, ширина: " + width + ", высота: " + height + ")";
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int hash = 1;
-        hash = prime * hash + Double.hashCode(sideWidth);
-        hash = prime * hash + Double.hashCode(sideHeight);
+
+        hash = prime * hash + Double.hashCode(width);
+        hash = prime * hash + Double.hashCode(height);
+
         return hash;
     }
 
@@ -59,6 +57,6 @@ public class Rectangle implements Shape, Comparable<Shape>{
 
         Rectangle rectangle = (Rectangle) o;
 
-        return sideWidth == rectangle.sideWidth && sideHeight == rectangle.sideHeight;
+        return width == rectangle.width && height == rectangle.height;
     }
 }

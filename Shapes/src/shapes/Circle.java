@@ -1,6 +1,6 @@
 package shapes;
 
-public class Circle implements Shape, Comparable<Shape> {
+public class Circle implements Shape {
     private final double radius;
 
     public Circle(double radius) {
@@ -27,13 +27,9 @@ public class Circle implements Shape, Comparable<Shape> {
         return 2 * Math.PI * radius;
     }
 
-    public int compareTo(Shape o) {
-        return (int) (this.getArea() - o.getArea());
-    }
-
     @Override
     public String toString() {
-        return "(Круг, площадь: " + getArea() + ", периметр: " + +getPerimeter() + ")";
+        return "(Круг, радиус: " + radius + ")";
     }
 
     @Override
@@ -54,5 +50,9 @@ public class Circle implements Shape, Comparable<Shape> {
         Circle circle = (Circle) o;
 
         return radius == circle.radius;
+    }
+
+    public double getRadius() {
+        return radius;
     }
 }
