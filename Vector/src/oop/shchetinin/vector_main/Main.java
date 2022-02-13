@@ -5,8 +5,8 @@ import oop.shchetinin.vector.Vector;
 public class Main {
     public static void main(String[] args) {
         try {
-            double[] a = {1, 5, 6, 6, 8};
-            Vector vector = new Vector(0, a);
+            double[] components = {1, 5, 6, 6, 8};
+            Vector vector = new Vector(0, components);
             System.out.println(vector);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
