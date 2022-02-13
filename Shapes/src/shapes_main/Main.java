@@ -46,10 +46,10 @@ public class Main {
         Shape triangle = new Triangle(1, 1, 1, 9, 9, 9);
 
         System.out.println(triangle);
-        System.out.println("Ширина треугольника: " + triangle.getWidth());
         System.out.println("Координаты: (" + ((Triangle) triangle).getX1() + ", " + ((Triangle) triangle).getY1() + "), ("
                 + ((Triangle) triangle).getX2() + ", " + ((Triangle) triangle).getY2() + "), "
                 + ((Triangle) triangle).getX3() + ", " + ((Triangle) triangle).getY3() + ")");
+        System.out.println("Ширина треугольника: " + triangle.getWidth());
         System.out.println("Высота треугольника: " + triangle.getHeight());
         System.out.println("Площадь треугольника: " + triangle.getArea());
         System.out.println("Периметр треугольника: " + triangle.getPerimeter());
