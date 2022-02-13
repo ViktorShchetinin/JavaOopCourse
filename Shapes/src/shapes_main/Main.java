@@ -43,21 +43,21 @@ public class Main {
         System.out.println("Периметр прямоугольника: " + rectangle.getPerimeter());
         System.out.println();
 
-        Shape triangle = new Triangle(1, 1, 1, 9, 9, 9);
+        Triangle triangle = new Triangle(1, 1, 1, 9, 9, 9);
 
         System.out.println(triangle);
-        System.out.println("Координаты: (" + ((Triangle) triangle).getX1() + ", " + ((Triangle) triangle).getY1() + "), ("
-                + ((Triangle) triangle).getX2() + ", " + ((Triangle) triangle).getY2() + "), "
-                + ((Triangle) triangle).getX3() + ", " + ((Triangle) triangle).getY3() + ")");
+        System.out.println("Координаты: (" + triangle.getX1() + ", " + triangle.getY1() + "), ("
+                + triangle.getX2() + ", " + triangle.getY2() + "), "
+                + (triangle.getX3() + ", " + triangle.getY3() + ")"));
         System.out.println("Ширина треугольника: " + triangle.getWidth());
         System.out.println("Высота треугольника: " + triangle.getHeight());
         System.out.println("Площадь треугольника: " + triangle.getArea());
         System.out.println("Периметр треугольника: " + triangle.getPerimeter());
         System.out.println();
 
-        Shape circle = new Circle(10);
+        Circle circle = new Circle(10);
 
-        System.out.println("Ширина круга: " + ((Circle) circle).getRadius());
+        System.out.println("Ширина круга: " + (circle).getRadius());
         System.out.println("Ширина круга: " + circle.getWidth());
         System.out.println("Высота круга: " + circle.getHeight());
         System.out.println("Площадь круга: " + circle.getArea());
