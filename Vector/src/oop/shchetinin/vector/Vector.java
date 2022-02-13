@@ -168,22 +168,22 @@ public class Vector {
         return new Vector(resultComponents);
     }
 
-    public static Vector getMultiple(Vector vector1, Vector vector2) {
+    public static double getMultiple(Vector vector1, Vector vector2) {
         int max = Math.max(vector1.components.length, vector2.components.length);
 
-        double[] resultComponents = new double[max];
+        double result = 0;
 
         for (int i = 0; i < max; i++) {
             if (i >= vector1.components.length) {
-                resultComponents[i] = 0;
+                result += 0;
             } else if (i >= vector2.components.length) {
-                resultComponents[i] = 0;
+                result += 0;
             } else {
-                resultComponents[i] = vector1.components[i] * vector2.components[i];
+                result+= vector1.components[i] * vector2.components[i];
             }
         }
 
-        return new Vector(resultComponents);
+        return result;
     }
 
     public Vector getMultiplyVectorByScalar(double scalar) {
