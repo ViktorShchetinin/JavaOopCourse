@@ -1,7 +1,7 @@
 package shapes;
 
 public class Square implements Shape {
-    private final double sideLength;
+    private double sideLength;
 
     public Square(double sideLength) {
         this.sideLength = sideLength;
@@ -50,5 +50,9 @@ public class Square implements Shape {
         Square square = (Square) o;
 
         return sideLength == square.sideLength;
+    }
+
+    public void setSideLength(double sideLength) {
+        this.sideLength = sideLength;
     }
 }

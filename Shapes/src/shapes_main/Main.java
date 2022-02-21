@@ -15,7 +15,7 @@ public class Main {
     }
 
     public static Shape getShapeWithSecondPerimeter(Shape[] shapesArray) {
-        if (shapesArray.length == 0) {
+        if (shapesArray.length == 0 || shapesArray.length == 1) {
             return null;
         }
 
@@ -24,10 +24,13 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Shape square = new Square(5);
-        Shape square1 = new Square(5);
+        Square square = new Square(5);
+        Square square1 = new Square(5);
         System.out.println("Результат сравнения двух квадратов " + square + " и "
                 + square1 + ": " + square.equals(square1));
+
+        square.setSideLength(6);
+        square1.setSideLength(6);
 
         System.out.println("Ширина квадрата: " + square.getWidth());
         System.out.println("Высота квадрата: " + square.getHeight());
@@ -35,7 +38,10 @@ public class Main {
         System.out.println("Периметр квадрата: " + square.getPerimeter());
         System.out.println();
 
-        Shape rectangle = new Rectangle(5, 2);
+        Rectangle rectangle = new Rectangle(5, 2);
+
+        rectangle.setWidth(6);
+        rectangle.setHeight(3);
 
         System.out.println("Ширина прямоугольника: " + rectangle.getWidth());
         System.out.println("Высота прямоугольника: " + rectangle.getHeight());
@@ -45,10 +51,17 @@ public class Main {
 
         Triangle triangle = new Triangle(1, 1, 1, 9, 9, 9);
 
+        triangle.setX1(2);
+        triangle.setX2(2);
+        triangle.setX3(2);
+        triangle.setY1(10);
+        triangle.setY2(10);
+        triangle.setY3(10);
+
         System.out.println(triangle);
         System.out.println("Координаты: (" + triangle.getX1() + ", " + triangle.getY1() + "), ("
                 + triangle.getX2() + ", " + triangle.getY2() + "), "
-                + (triangle.getX3() + ", " + triangle.getY3() + ")"));
+                + triangle.getX3() + ", " + triangle.getY3() + ")");
         System.out.println("Ширина треугольника: " + triangle.getWidth());
         System.out.println("Высота треугольника: " + triangle.getHeight());
         System.out.println("Площадь треугольника: " + triangle.getArea());
@@ -57,7 +70,9 @@ public class Main {
 
         Circle circle = new Circle(10);
 
-        System.out.println("Ширина круга: " + (circle).getRadius());
+        circle.setRadius(9);
+
+        System.out.println("Ширина круга: " + circle.getRadius());
         System.out.println("Ширина круга: " + circle.getWidth());
         System.out.println("Высота круга: " + circle.getHeight());
         System.out.println("Площадь круга: " + circle.getArea());

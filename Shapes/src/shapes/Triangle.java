@@ -1,12 +1,12 @@
 package shapes;
 
 public class Triangle implements Shape {
-    private final double x1;
-    private final double y1;
-    private final double x2;
-    private final double y2;
-    private final double x3;
-    private final double y3;
+    private double x1;
+    private double y1;
+    private double x2;
+    private double y2;
+    private double x3;
+    private double y3;
 
     public Triangle(double x1, double y1, double x2, double y2, double x3, double y3) {
         this.x1 = x1;
@@ -22,20 +22,12 @@ public class Triangle implements Shape {
     }
 
     @Override
-    public double getWidth() {
-        if (getArea() == 0) {
-            return 0;
-        }
-
+    public double getHeight() {
         return Math.max(y1, Math.max(y2, y3)) - Math.min(y1, Math.min(y2, y3));
     }
 
     @Override
-    public double getHeight() {
-        if (getArea() == 0) {
-            return 0;
-        }
-
+    public double getWidth() {
         return Math.max(x1, Math.max(x2, x3)) - Math.min(x1, Math.min(x2, x3));
     }
 
@@ -59,8 +51,7 @@ public class Triangle implements Shape {
 
     @Override
     public String toString() {
-        return "Треугольник, координаты: " + "(" + x1 + ", " + y1 + "), " + "(" + x2 + ", " + y2 + "), " +
-                "(" + x3 + ", " + y3 + ")";
+        return "Треугольник, координаты: (" + x1 + ", " + y1 + "), (" + x2 + ", " + y2 + "), (" + x3 + ", " + y3 + ")";
     }
 
     @Override
@@ -116,5 +107,29 @@ public class Triangle implements Shape {
 
     public double getY3() {
         return y3;
+    }
+
+    public void setX1(double x1) {
+        this.x1 = x1;
+    }
+
+    public void setX2(double x2) {
+        this.x2 = x2;
+    }
+
+    public void setX3(double x3) {
+        this.x3 = x3;
+    }
+
+    public void setY1(double y1) {
+        this.y1 = y1;
+    }
+
+    public void setY2(double y2) {
+        this.y2 = y2;
+    }
+
+    public void setY3(double y3) {
+        this.y3 = y3;
     }
 }
