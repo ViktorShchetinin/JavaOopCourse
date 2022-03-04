@@ -24,19 +24,19 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Square square = new Square(5);
         Square square1 = new Square(5);
-        System.out.println("Результат сравнения двух квадратов " + square + " и "
-                + square1 + ": " + square.equals(square1));
+        Square square2 = new Square(5);
+        System.out.println("Результат сравнения двух квадратов " + square1 + " и "
+                + square2 + ": " + square1.equals(square2));
 
-        square.setSideLength(6);
         square1.setSideLength(6);
+        square2.setSideLength(6);
 
-        System.out.println("Ширина квадрата: " + square.getWidth());
-        System.out.println("Высота квадрата: " + square.getHeight());
-        System.out.println("Длина стороны квадрата: " + square.getSideLength());
-        System.out.println("Площадь квадрата: " + square.getArea());
-        System.out.println("Периметр квадрата: " + square.getPerimeter());
+        System.out.println("Ширина квадрата: " + square1.getWidth());
+        System.out.println("Высота квадрата: " + square1.getHeight());
+        System.out.println("Длина стороны квадрата: " + square1.getSideLength());
+        System.out.println("Площадь квадрата: " + square1.getArea());
+        System.out.println("Периметр квадрата: " + square1.getPerimeter());
         System.out.println();
 
         Rectangle rectangle = new Rectangle(5, 2);
@@ -44,7 +44,8 @@ public class Main {
         rectangle.setWidth(6);
         rectangle.setHeight(3);
 
-        System.out.println("Ширина прямоугольника: " + rectangle.getWidth());
+        System.out.println("Ширина прямоугольника: " + rectangle.getWidth
+                ());
         System.out.println("Высота прямоугольника: " + rectangle.getHeight());
         System.out.println("Площадь прямоугольника: " + rectangle.getArea());
         System.out.println("Периметр прямоугольника: " + rectangle.getPerimeter());
@@ -80,7 +81,7 @@ public class Main {
         System.out.println("Периметр круга: " + circle.getPerimeter());
         System.out.println();
 
-        Shape[] shapesArray = {circle, new Circle(3), square, new Square(100), triangle, rectangle};
+        Shape[] shapesArray = {circle, new Circle(3), square1, new Square(100), triangle, rectangle};
 
         Arrays.sort(shapesArray, new AreaComparator());
         System.out.println(Arrays.toString(shapesArray));
