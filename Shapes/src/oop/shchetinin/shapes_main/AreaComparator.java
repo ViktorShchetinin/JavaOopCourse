@@ -1,6 +1,6 @@
-package shapes_main;
+package oop.shchetinin.shapes_main;
 
-import shapes.Shape;
+import oop.shchetinin.shapes.Shape;
 
 import java.util.Comparator;
 

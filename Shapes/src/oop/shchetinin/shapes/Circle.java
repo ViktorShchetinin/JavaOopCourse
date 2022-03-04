@@ -1,9 +1,17 @@
-package shapes;
+package oop.shchetinin.shapes;
 
 public class Circle implements Shape {
     private double radius;
 
     public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    public double getRadius() {
+        return radius;
+    }
+
+    public void setRadius(double radius) {
         this.radius = radius;
     }
 
@@ -50,13 +58,5 @@ public class Circle implements Shape {
         Circle circle = (Circle) o;
 
         return radius == circle.radius;
-    }
-
-    public double getRadius() {
-        return radius;
-    }
-
-    public void setRadius(double radius) {
-        this.radius = radius;
     }
 }

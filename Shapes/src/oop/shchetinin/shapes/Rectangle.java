@@ -1,4 +1,4 @@
-package shapes;
+package oop.shchetinin.shapes;
 
 public class Rectangle implements Shape {
     private double width;
@@ -14,9 +14,17 @@ public class Rectangle implements Shape {
         return width;
     }
 
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
     @Override
     public double getHeight() {
         return height;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
     }
 
     @Override
@@ -58,13 +66,5 @@ public class Rectangle implements Shape {
         Rectangle rectangle = (Rectangle) o;
 
         return width == rectangle.width && height == rectangle.height;
-    }
-
-    public void setWidth(double width) {
-        this.width = width;
-    }
-
-    public void setHeight(double height) {
-        this.height = height;
     }
 }

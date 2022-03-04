@@ -1,9 +1,17 @@
-package shapes;
+package oop.shchetinin.shapes;
 
 public class Square implements Shape {
     private double sideLength;
 
     public Square(double sideLength) {
+        this.sideLength = sideLength;
+    }
+
+    public double getSideLength() {
+        return sideLength;
+    }
+
+    public void setSideLength(double sideLength) {
         this.sideLength = sideLength;
     }
 
@@ -50,9 +58,5 @@ public class Square implements Shape {
         Square square = (Square) o;
 
         return sideLength == square.sideLength;
-    }
-
-    public void setSideLength(double sideLength) {
-        this.sideLength = sideLength;
     }
 }

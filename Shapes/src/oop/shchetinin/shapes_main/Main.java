@@ -1,6 +1,6 @@
-package shapes_main;
+package oop.shchetinin.shapes_main;
 
-import shapes.*;
+import oop.shchetinin.shapes.*;
 
 import java.util.Arrays;
 
@@ -15,7 +15,7 @@ public class Main {
     }
 
     public static Shape getShapeWithSecondPerimeter(Shape[] shapesArray) {
-        if (shapesArray.length == 0 || shapesArray.length == 1) {
+        if (shapesArray.length <= 1) {
             return null;
         }
 
@@ -34,6 +34,7 @@ public class Main {
 
         System.out.println("Ширина квадрата: " + square.getWidth());
         System.out.println("Высота квадрата: " + square.getHeight());
+        System.out.println("Длина стороны квадрата: " + square.getSideLength());
         System.out.println("Площадь квадрата: " + square.getArea());
         System.out.println("Периметр квадрата: " + square.getPerimeter());
         System.out.println();

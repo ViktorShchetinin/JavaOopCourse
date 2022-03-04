@@ -1,4 +1,4 @@
-package shapes;
+package oop.shchetinin.shapes;
 
 public interface Shape {
     double getWidth();
