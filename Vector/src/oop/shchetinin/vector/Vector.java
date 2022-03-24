@@ -19,7 +19,7 @@ public class Vector {
         }
 
         if (components.length == 0) {
-            throw new IllegalArgumentException("Vector size must be > 0, n = " + components.length);
+            throw new IllegalArgumentException("Vector size must be > 0, vector size = " + components.length);
         }
 
         this.components = Arrays.copyOf(components, components.length);
@@ -45,19 +45,23 @@ public class Vector {
         return components.length;
     }
 
-    public int[] getLength() {
-        return new int[]{0, components.length - 1};
+    public double getLength() {
+        return components.length;
     }
 
     public double getComponentByIndex(int index) {
-        if (index >= components.length) {
-            throw new IllegalArgumentException("Index must be < component length, index = " + index);
+        if (index >= components.length || index < 0) {
+            throw new ArrayIndexOutOfBoundsException("Index must be < component length and >= 0, index = " + index);
         }
 
         return components[index];
     }
 
     public void setComponentByIndex(int index, double component) {
+        if (index >= components.length || index < 0) {
+            throw new ArrayIndexOutOfBoundsException("Index must be < component length and >= 0, index = " + index);
+        }
+
         components[index] = component;
     }
 
@@ -68,8 +72,7 @@ public class Vector {
         sb.append("{");
 
         for (double component : components) {
-            sb.append(component)
-                    .append(", ");
+            sb.append(component).append(", ");
         }
 
         sb.delete(sb.length() - 2, sb.length())
@@ -78,17 +81,13 @@ public class Vector {
         return sb.toString();
     }
 
-    public void append(Vector vector) {
+    public void add(Vector vector) {
         if (components.length < vector.components.length) {
             components = Arrays.copyOf(components, vector.components.length);
         }
 
-        if (components.length > vector.components.length) {
-            vector.components = Arrays.copyOf(vector.components, components.length);
-        }
-
-        for (int i = 0; i < components.length; i++) {
-            components[i] = components[i] + vector.components[i];
+        for (int i = 0; i < vector.components.length; i++) {
+            components[i] += vector.components[i];
         }
     }
 
@@ -97,19 +96,15 @@ public class Vector {
             components = Arrays.copyOf(components, vector.components.length);
         }
 
-        if (components.length > vector.components.length) {
-            vector.components = Arrays.copyOf(vector.components, components.length);
-        }
-
-        for (int i = 0; i < components.length; i++) {
-            components[i] = components[i] - vector.components[i];
+        for (int i = 0; i < vector.components.length; i++) {
+            components[i] -= vector.components[i];
         }
     }
 
     public static Vector getSum(Vector vector1, Vector vector2) {
         Vector resultVector = new Vector(vector1);
 
-        resultVector.append(vector2);
+        resultVector.add(vector2);
 
         return resultVector;
     }
@@ -123,18 +118,18 @@ public class Vector {
     }
 
     public static double getScalarProduct(Vector vector1, Vector vector2) {
-        if (vector1.components.length < vector2.components.length) {
-            vector1.components = Arrays.copyOf(vector1.components, vector2.components.length);
-        }
-
-        if (vector1.components.length > vector2.components.length) {
-            vector2.components = Arrays.copyOf(vector2.components, vector1.components.length);
-        }
+        int max = Math.max(vector1.components.length, vector2.components.length);
 
         double result = 0;
 
-        for (int i = 0; i < vector1.components.length; i++) {
-            result += vector1.components[i] * vector2.components[i];
+        for (int i = 0; i < max; i++) {
+            if (i >= vector1.components.length) {
+                result += vector2.components[i];
+            } else if (i >= vector2.components.length) {
+                result += vector1.components[i];
+            } else {
+                result += vector1.components[i] * vector2.components[i];
+            }
         }
 
         return result;

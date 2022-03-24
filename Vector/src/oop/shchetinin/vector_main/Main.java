@@ -31,7 +31,7 @@ public class Main {
         System.out.println(vector1Clone.getSize());
         System.out.println();
 
-        vectorClone.append(vector1Clone);
+        vectorClone.add(vector1Clone);
         System.out.println("SUM: " + vectorClone);
         System.out.println("SUM: " + Vector.getSum(vectorClone, vector1Clone));
         System.out.println();
@@ -48,10 +48,10 @@ public class Main {
         System.out.println("REVERSE: " + vectorClone);
         System.out.println();
 
-        System.out.println("Vector vectorClone length: " + Arrays.toString(vectorClone.getLength()));
+        System.out.println("Vector vectorClone length: " + vectorClone.getLength());
         System.out.println();
 
-        vector1Clone.setComponentByIndex(3, 5.0);
+        vector1Clone.setComponentByIndex(6, 5.0);
         vector1Clone.setComponentByIndex(4, 2.0);
         System.out.println("vector1: " + vector1Clone);
         System.out.println();
@@ -62,12 +62,12 @@ public class Main {
         System.out.println("DIFFERENCE: " + Vector.getDifference(vectorClone, vectorClone));
         System.out.println();
 
-        System.out.println("SCALAR MULTIPLE: " + Vector.getScalarProduct(vector1, vector));
+        System.out.println("SCALAR PRODUCT: " + Vector.getScalarProduct(vector1, vector));
         System.out.println();
 
         try {
-            System.out.println(vector1Clone.getComponentByIndex(6));
-        } catch (IllegalArgumentException e) {
+            System.out.println(vector1Clone.getComponentByIndex(10));
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println(e.getMessage());
         }
     }
