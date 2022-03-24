@@ -8,10 +8,18 @@ public class ListItem<T> {
     }
 
     public ListItem(T data) {
+        if (data == null) {
+            throw new NullPointerException("Data must be not null, data = " + data);
+        }
+
         this.data = data;
     }
 
     public ListItem(T data, ListItem<T> next) {
+        if (data == null) {
+            throw new NullPointerException("Data must be not null, data = " + data);
+        }
+
         this.data = data;
         this.next = next;
     }
