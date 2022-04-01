@@ -33,6 +33,10 @@ public class ListItem<T> {
     }
 
     public ListItem(ListItem<T> listItem) {
+        if (listItem == null) {
+            throw new NullPointerException("ListItem must be not null, listItem = " + listItem);
+        }
+
         this.data = listItem.getData();
         this.next = listItem.getNext();
     }

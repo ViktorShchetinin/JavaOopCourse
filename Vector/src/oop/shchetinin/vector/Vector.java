@@ -46,12 +46,12 @@ public class Vector {
     }
 
     public double getLength() {
-        return components.length;
+        return components.length - 1;
     }
 
     public double getComponentByIndex(int index) {
         if (index >= components.length || index < 0) {
-            throw new ArrayIndexOutOfBoundsException("Index must be < component length and >= 0, index = " + index);
+            throw new IndexOutOfBoundsException("Index must be < " + components.length + " and >= 0, index = " + index);
         }
 
         return components[index];
@@ -59,7 +59,7 @@ public class Vector {
 
     public void setComponentByIndex(int index, double component) {
         if (index >= components.length || index < 0) {
-            throw new ArrayIndexOutOfBoundsException("Index must be < component length and >= 0, index = " + index);
+            throw new IndexOutOfBoundsException("Index must be < " + components.length + " and >= 0, index = " + index);
         }
 
         components[index] = component;
@@ -123,11 +123,7 @@ public class Vector {
         double result = 0;
 
         for (int i = 0; i < max; i++) {
-            if (i >= vector1.components.length) {
-                result += vector2.components[i];
-            } else if (i >= vector2.components.length) {
-                result += vector1.components[i];
-            } else {
+            if (i < vector1.components.length && i < vector2.components.length) {
                 result += vector1.components[i] * vector2.components[i];
             }
         }

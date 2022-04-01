@@ -66,8 +66,8 @@ public class Main {
         System.out.println();
 
         try {
-            System.out.println(vector1Clone.getComponentByIndex(10));
-        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println(vector1Clone.getComponentByIndex(8));
+        } catch (IndexOutOfBoundsException e) {
             System.out.println(e.getMessage());
         }
     }
