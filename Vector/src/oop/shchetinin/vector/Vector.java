@@ -46,7 +46,13 @@ public class Vector {
     }
 
     public double getLength() {
-        return components.length - 1;
+        double squareOfLength = 0;
+
+        for (double component : components) {
+            squareOfLength += Math.pow(component, 2);
+        }
+
+        return Math.sqrt(squareOfLength);
     }
 
     public double getComponentByIndex(int index) {
@@ -118,14 +124,12 @@ public class Vector {
     }
 
     public static double getScalarProduct(Vector vector1, Vector vector2) {
-        int max = Math.max(vector1.components.length, vector2.components.length);
+        int min = Math.min(vector1.components.length, vector2.components.length);
 
         double result = 0;
 
-        for (int i = 0; i < max; i++) {
-            if (i < vector1.components.length && i < vector2.components.length) {
-                result += vector1.components[i] * vector2.components[i];
-            }
+        for (int i = 0; i < min; i++) {
+            result += vector1.components[i] * vector2.components[i];
         }
 
         return result;
