@@ -7,31 +7,32 @@ public class SinglyLinkedList<T> {
     public SinglyLinkedList() {
     }
 
-    public SinglyLinkedList(ListItem<T> head) {
-        this.head = head;
+    public SinglyLinkedList(T head) {
+        this.head = new ListItem<>(head);
         count++;
     }
 
     public void copyOf(SinglyLinkedList<T> list) {
-        head = new ListItem<>(list.getHead());
-        count = list.getSize();
+        head = new ListItem<>(list.head.getData(), list.head.getNext());
+        count = list.count;
     }
 
     @Override
     public String toString() {
+        if (count == 0) {
+            return "List is empty!";
+        }
+
         StringBuilder sb = new StringBuilder();
 
         sb.append("(");
 
-        int i = 0;
         ListItem<T> current = head;
 
-        while (i < count) {
-            sb.append(current).append(", ");
+        while (current != null) {
+            sb.append(current.getData().toString()).append(", ");
 
             current = current.getNext();
-
-            i++;
         }
 
         sb.delete(sb.length() - 2, sb.length()).append(")");
@@ -43,7 +44,7 @@ public class SinglyLinkedList<T> {
         return count;
     }
 
-    public ListItem<T> getHead() {
+    private ListItem<T> getHead() {
         return head;
     }
 
@@ -52,22 +53,21 @@ public class SinglyLinkedList<T> {
         count++;
     }
 
-    public ListItem<T> deleteFirst() {
+    public T deleteFirst() {
         ListItem<T> firstElement = head;
 
         head = head.getNext();
         count--;
 
-        return firstElement;
+        return firstElement.getData();
     }
 
     public void add(T data) {
         ListItem<T> current = head;
 
         if (head == null) {
-            head = new ListItem<>();
+            head = new ListItem<>(data);
 
-            head.setData(data);
             head.setNext(null);
         } else {
             while (current.next != null) {
@@ -82,13 +82,13 @@ public class SinglyLinkedList<T> {
         count++;
     }
 
-    public ListItem<T> getByIndex(int index) {
-        if (index > count) {
-            throw new IllegalArgumentException("Index must be <= list length, index = " + index);
+    public T getByIndex(int index) {
+        if (index >= count || index < 0) {
+            throw new IllegalArgumentException("Index must be <= list length and >= 0, index = " + index);
         }
 
         if (index == 0) {
-            return head;
+            return head.getData();
         }
 
         ListItem<T> current = head;
@@ -100,20 +100,20 @@ public class SinglyLinkedList<T> {
             currentIndex++;
         }
 
-        return current;
+        return current.getData();
     }
 
-    public ListItem<T> changeByIndex(int index, T data) {
+    public T changeByIndex(int index, T data) {
         if (index >= count || index < 0) {
             throw new IllegalArgumentException("Index must be < list length and >= 0, index = " + index);
         }
 
         if (index == 0) {
-            ListItem<T> firstElement = new ListItem<>(head);
+            ListItem<T> firstElement = head;
 
             head.setData(data);
 
-            return firstElement;
+            return firstElement.getData();
         }
 
         ListItem<T> current = head;
@@ -125,11 +125,11 @@ public class SinglyLinkedList<T> {
             currentIndex++;
         }
 
-        ListItem<T> oldElement = new ListItem<>(current);
+        ListItem<T> oldElement = current;
 
         current.setData(data);
 
-        return oldElement;
+        return oldElement.getData();
     }
 
     public void addByIndex(int index, T data) {
@@ -160,7 +160,7 @@ public class SinglyLinkedList<T> {
         }
     }
 
-    public ListItem<T> deleteByIndex(int index) {
+    public T deleteByIndex(int index) {
         if (index >= count || index < 0) {
             throw new IllegalArgumentException("Index must be < list length and >= 0, index = " + index);
         }
@@ -169,7 +169,7 @@ public class SinglyLinkedList<T> {
 
         if (index == 0) {
             deleteFirst();
-            return current;
+            return current.getData();
         }
 
         int currentIndex = 0;
@@ -187,7 +187,7 @@ public class SinglyLinkedList<T> {
 
         count--;
 
-        return current;
+        return current.getData();
     }
 
     public boolean deleteByValue(T data) {
