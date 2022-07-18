@@ -7,33 +7,34 @@ public class Main {
         SinglyLinkedList<Integer> list = new SinglyLinkedList<>(5);
 
         list.add(10);
-        list.insertFirst(1);
-        list.insertFirst(8);
-        list.insertFirst(5);
-        list.insertFirst(3);
+        list.addFirst(1);
+        list.addFirst(8);
+        list.addFirst(5);
+        list.addFirst(3);
         list.add(10);
 
         System.out.println(list);
-        System.out.println("List size: " + list.getSize());
+        System.out.println("List size: " + list.getCount());
 
         System.out.println("Element has been removed: " + list.deleteFirst());
         System.out.println();
 
-        list.addByIndex(4, 99);
+        list.addByIndex(5, 99);
+        System.out.println(list);
 
         System.out.println("Element has been removed: " + list.deleteByIndex(5));
 
         System.out.println(list);
-        System.out.println(list.getByIndex(4));
+        System.out.println(list.getByIndex(5));
         System.out.println();
 
-        System.out.println("Element has been changed: " + list.changeByIndex(4, 66));
+        System.out.println("Element has been changed: " + list.setByIndex(4, 66));
 
         System.out.println(list);
         System.out.println();
 
-        System.out.println(list.deleteByValue(8));
-        System.out.println(list);
+        System.out.println(list.deleteByData(5));
+        System.out.println("Delete by data " + list);
         System.out.println();
 
         SinglyLinkedList<Integer> listCopy = new SinglyLinkedList<>();
@@ -44,5 +45,8 @@ public class Main {
         System.out.println(list);
         list.reverse();
         System.out.println(list);
+
+        SinglyLinkedList<Integer> emptyList = new SinglyLinkedList<>();
+        System.out.println(emptyList);
     }
 }
