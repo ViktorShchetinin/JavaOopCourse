@@ -34,11 +34,11 @@ public class Main {
         System.out.println();
 
         System.out.println(list.deleteByData(5));
-        System.out.println("Delete by data " + list);
+        System.out.println("Delete by data: " + list);
         System.out.println();
 
-        SinglyLinkedList<Integer> listCopy = new SinglyLinkedList<>();
-        listCopy.copyOf(list);
+        SinglyLinkedList<Integer> listCopy = list.copy();
+        list.add(77);
         System.out.println("List copy: " + listCopy);
         System.out.println();
 
@@ -46,7 +46,6 @@ public class Main {
         list.reverse();
         System.out.println(list);
 
-        SinglyLinkedList<Integer> emptyList = new SinglyLinkedList<>();
-        System.out.println(emptyList);
+        System.out.println("Empty list: " + new SinglyLinkedList<>());
     }
 }
