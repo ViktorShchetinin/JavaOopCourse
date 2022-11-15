@@ -1,8 +1,8 @@
 package oop.shchetinin.list;
 
 class ListItem<T> {
-    protected T data;
-    protected ListItem<T> next;
+    private T data;
+    private ListItem<T> next;
 
     public ListItem(T data) {
         this.data = data;

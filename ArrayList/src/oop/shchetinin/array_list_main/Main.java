@@ -8,6 +8,7 @@ public class Main {
 
         list.add("sdf");
         list.add("sdf");
+        list.add("sdf");
         list.remove("sdf");
 
         System.out.println(list);

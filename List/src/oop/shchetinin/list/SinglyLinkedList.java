@@ -10,8 +10,8 @@ public class SinglyLinkedList<T> {
     public SinglyLinkedList() {
     }
 
-    public SinglyLinkedList(T head) {
-        this.head = new ListItem<>(head);
+    public SinglyLinkedList(T data) {
+        this.head = new ListItem<>(data);
         count++;
     }
 
@@ -72,8 +72,8 @@ public class SinglyLinkedList<T> {
     }
 
     public void addByIndex(int index, T data) {
-        if (index > count || index < 0) {
-            throw new IndexOutOfBoundsException("Index must be < " + getCount() + " and >= 0, index = " + index);
+        if (index < 0 || index > count) {
+            throw new IndexOutOfBoundsException("Index must be >= 0 and <= " + count + " , index = " + index);
         }
 
         if (index == 0) {
@@ -81,19 +81,15 @@ public class SinglyLinkedList<T> {
             return;
         }
 
-        ListItem<T> currentItem = getItemByIndex(index - 1);
+        ListItem<T> previousItem = getItemByIndex(index - 1);
 
-        currentItem.setNext(new ListItem<>(data, currentItem.getNext()));
+        previousItem.setNext(new ListItem<>(data, previousItem.getNext()));
 
         count++;
     }
 
     public T getByIndex(int index) {
         checkIndex(index);
-
-        if (index == 0) {
-            return head.getData();
-        }
 
         ListItem<T> item = getItemByIndex(index);
 
@@ -103,17 +99,13 @@ public class SinglyLinkedList<T> {
     public T setByIndex(int index, T data) {
         checkIndex(index);
 
-        if (index == 0) {
-            head.setData(data);
-
-            return data;
-        }
-
         ListItem<T> item = getItemByIndex(index);
+
+        T oldData = item.getData();
 
         item.setData(data);
 
-        return data;
+        return oldData;
     }
 
     public T deleteFirst() {
@@ -121,33 +113,34 @@ public class SinglyLinkedList<T> {
             throw new NoSuchElementException("List is empty! Count must be >= 1, count = " + count);
         }
 
-        ListItem<T> firstItem = head;
+        ListItem<T> deletedItem = head;
 
         head = head.getNext();
         count--;
 
-        return firstItem.getData();
+        return deletedItem.getData();
     }
 
     public T deleteByIndex(int index) {
         checkIndex(index);
 
         if (index == 0) {
+            T deletedData = head.getData();
+
             deleteFirst();
-            return head.getData();
+
+            return deletedData;
         }
 
-        ListItem<T> item = getItemByIndex(index - 1);
+        ListItem<T> previousItem = getItemByIndex(index - 1);
 
-        ListItem<T> previousItem = item;
+        ListItem<T> deletedItem = new ListItem<>(previousItem.getNext().getData());
 
-        item = item.getNext();
-
-        previousItem.setNext(item.getNext());
+        previousItem.setNext(previousItem.getNext().getNext());
 
         count--;
 
-        return item.getData();
+        return deletedItem.getData();
     }
 
     public boolean deleteByData(T data) {
@@ -160,17 +153,12 @@ public class SinglyLinkedList<T> {
 
             return true;
         }
-        int i = 0;
 
         ListItem<T> currentItem = head;
 
-        while (i < count) {
+        for (int i = 0; i < count; i++) {
             if (Objects.equals(currentItem.getNext().getData(), data)) {
-                ListItem<T> previousItem = currentItem;
-
-                currentItem = currentItem.getNext();
-
-                previousItem.setNext(currentItem.getNext());
+                currentItem.setNext(currentItem.getNext().getNext());
 
                 count--;
 
@@ -178,8 +166,6 @@ public class SinglyLinkedList<T> {
             }
 
             currentItem = currentItem.getNext();
-
-            i++;
         }
 
         return false;
@@ -201,7 +187,7 @@ public class SinglyLinkedList<T> {
 
     private void checkIndex(int index) {
         if (index < 0 || index >= count) {
-            throw new IndexOutOfBoundsException("Index must be < " + count + " and >= 0, index = " + index);
+            throw new IndexOutOfBoundsException("Index must be >= 0 and < " + count + " , index = " + index);
         }
     }
 
